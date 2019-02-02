@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <iomanip>
+#include <limits>
 
 #include "Data.h"
 
@@ -16,12 +17,25 @@ TestingData testingData;
 
 TEST_CASE("testing finding the median function")
  {
-     //sorry for this disgusting mess over here
-    CHECK( testingData.TestMedian( testCases::oddNumOfElements ).first == testingData.TestMedian( testCases::oddNumOfElements ).second );
-    CHECK( testingData.TestMedian( testCases::evenNumOfElements ).first == testingData.TestMedian( testCases::evenNumOfElements ).second );
-    CHECK( testingData.TestMedian( testCases::partiallySortedOdd ).first == testingData.TestMedian( testCases::partiallySortedOdd ).second );
-    CHECK( testingData.TestMedian( testCases::partiallySortedEven ).first == testingData.TestMedian( testCases::partiallySortedEven ).second );
-    CHECK( testingData.TestMedian( testCases::singleElement ).first == testingData.TestMedian( testCases::singleElement ).second );
+    // sorry for this disgusting mess below
+
+    // Espilon compare two double values for additional accuracy
+    auto eComp = [](double lhs, double rhs) -> bool
+    {
+        return fabs(lhs - rhs) <= std::numeric_limits<double>::epsilon();
+    };
+
+    // Get data testing unit output value and correct value
+    auto getUnit = []( testCases testCase, bool correctValue = false ) -> double
+    {
+        return correctValue ? testingData.TestMedian(testCase).second : testingData.TestMedian(testCase).first;
+    };
+
+    CHECK( eComp( getUnit(testCases::oddNumOfElements), getUnit(testCases::oddNumOfElements, true) ) );
+    CHECK( eComp( getUnit(testCases::evenNumOfElements), getUnit(testCases::evenNumOfElements, true) ) );
+    CHECK( eComp( getUnit(testCases::partiallySortedOdd), getUnit(testCases::partiallySortedOdd, true) ) );
+    CHECK( eComp( getUnit(testCases::partiallySortedEven), getUnit(testCases::partiallySortedEven, true) ) );
+    CHECK( eComp( getUnit(testCases::singleElement), getUnit(testCases::singleElement, true) ) );
 }
 
 TEST_CASE("testing the element addition function")
@@ -44,11 +58,6 @@ TEST_CASE("testing the element addition function")
 // 	// numericData.AddElement(222);
 // 	// numericData.PrintData();
 //     // std::cout << "median = " << numericData.FindMedian() << std::endl;
-
-//     float fa = 0.3f;
-//     double db = 1.2;
-
-//     if(fa > db)
 
 // 	return 0;
 // }

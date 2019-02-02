@@ -9,12 +9,9 @@
 template <class T>
 class Data
 {
-
 private:
-	std::vector<T> _data;
-	
+	std::vector<T> _data;	
 	bool _isDataSorted;
-
 
 public:
 	Data( T* data, size_t size );
@@ -39,7 +36,7 @@ public:
 	double FindMedian();
 
 	//-----------------------------------------------------------------------------
-	/// Getter for _data vector.
+	/// Getter for member '_data' of type vector<T>.
 	//-----------------------------------------------------------------------------
 	std::vector<T> const & GetData() const { return _data; } 
 
@@ -48,7 +45,6 @@ private:
 	/// Sort class data.
 	//-----------------------------------------------------------------------------
 	void Sort();
-
 };
 
 #include "Data.hpp"
