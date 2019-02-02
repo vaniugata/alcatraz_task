@@ -30,14 +30,15 @@ public:
     ~TestingData(){}
 
     //-----------------------------------------------------------------------------
-	/// This function returns a pair which holds the median calcluation
-    /// of the Data class and the correct median value for this input data.
+	/// This function returns a pair which holds the median calculation
+    /// from the Data class and the correct median value for this input data.
 	/// 'caseIdx' - index of the test case.
 	//-----------------------------------------------------------------------------
     std::pair<double, double> TestMedian( testCases caseIdx );
 
     //-----------------------------------------------------------------------------
-	/// This function compares two arrays after adding an element to the test set. 
+	/// This function compares two arrays after adding an element to the 
+    /// to be tested set. 
 	/// 'caseIdx' - index of the test case.
 	//-----------------------------------------------------------------------------
     bool TestElementAddition( testCases caseIdx );   

@@ -51,6 +51,7 @@ std::pair<double, double> TestingData::TestMedian( testCases caseIdx )
         default:
         break;
     }
+    return std::pair<double, double>( (-1.0), (-1.0) );
 }
 
 bool TestingData::TestElementAddition( testCases caseIdx )
@@ -64,9 +65,9 @@ bool TestingData::TestElementAddition( testCases caseIdx )
             Data<int> data( inputData, sizeof(inputData)/sizeof(inputData[0]) );
             data.AddElement(-6);
 
-            int correctOutputData[11] {-6, 12, 35, 46, 18, 2, 0, 93, -3, 14, 54};
+            int correctOutputData[11] {-6, -3, 0, 2, 12, 14, 18, 35, 46, 54, 93};
             
-            return std::equal( std::begin( inputData ), std::end( inputData ), std::begin( inputData ) );
+            return std::equal( std::begin( data.GetData() ), std::end( data.GetData() ), std::begin( correctOutputData ) );
         }
 
         case testCases::addAtEnd :
@@ -74,11 +75,11 @@ bool TestingData::TestElementAddition( testCases caseIdx )
              int inputData[10] {12, 35, 46, 18, 2, 0, 93, -3, 14, 54};
             
             Data<int> data( inputData, sizeof(inputData)/sizeof(inputData[0]) );
-            data.AddElement(78);
+            data.AddElement(108);
 
-            int correctOutputData[11] {12, 35, 46, 18, 2, 0, 93, -3, 14, 54, 78};
+            int correctOutputData[11] {-3, 0, 2, 12, 14, 18, 35, 46, 54, 93, 108};
 
-            return std::equal( std::begin( inputData ), std::end( inputData ), std::begin( inputData ) );
+            return std::equal( std::begin( data.GetData() ), std::end( data.GetData() ), std::begin( correctOutputData ) );
         }
 
         case testCases::addAtRandom :
@@ -90,7 +91,7 @@ bool TestingData::TestElementAddition( testCases caseIdx )
 
             int correctOutputData[6] {17, 28, 34, 42, 55, 56};
 
-            return std::equal( std::begin( inputData ), std::end( inputData ), std::begin( inputData ) );
+            return std::equal( std::begin( data.GetData() ), std::end( data.GetData() ), std::begin( correctOutputData ) );
         }
 
         case testCases::addOnExistingElement :
@@ -102,10 +103,11 @@ bool TestingData::TestElementAddition( testCases caseIdx )
 
             int correctOutputData[6] {17, 28, 28, 34, 55, 56};
 
-            return std::equal( std::begin( inputData ), std::end( inputData ), std::begin( inputData ) );
+            return std::equal( std::begin( data.GetData() ), std::end( data.GetData() ), std::begin( correctOutputData ) );
         }
 
         default:
         break;
     }
+    return false;
 }
